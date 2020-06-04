@@ -1,24 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+
+import "./App.css";
+
+import { useSelector, useDispatch } from "react-redux";
+
+const disparaSaga = function (dispatch) {
+  dispatch({
+    type: "DEFAULT_ACTION",
+  });
+};
 
 function App() {
+  const planet = useSelector((state) => state.planet.planetResult);
+  const dispatch = useDispatch();
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {planet ? (
+        <>
+          <p>{planet.name}</p>
+          <p></p>
+          <p></p>
+          <p></p>
+        </>
+      ) : (
+        <h1>AINDA NAO TEM PLANETA</h1>
+      )}
+      <button onClick={() => disparaSaga(dispatch)}> GET PLANET</button>
     </div>
   );
 }
